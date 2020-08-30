@@ -34,8 +34,8 @@ namespace FileManager
 
             //if (!Directory.Exists(backupDirectoryPath))
             //{
-               //Console.WriteLine($"Creating {backupDirectoryPath}");
-                Directory.CreateDirectory(backupDirectoryPath);
+            //Console.WriteLine($"Creating {backupDirectoryPath}");
+            Directory.CreateDirectory(backupDirectoryPath);
             //}
 
             // Copy file to backup dir
@@ -84,6 +84,8 @@ namespace FileManager
             File.Move(inProgressFilePath, completedFilePath);
 
             string inProgressDirectoryPath = Path.GetDirectoryName(inProgressFilePath);
+
+            Directory.Delete(inProgressDirectoryPath, true);
         }
 
         private void ProcessTextFile(string inProgressFilePath)
