@@ -68,6 +68,22 @@ namespace FileManager
                     Console.WriteLine($"{extension} is an unsupported file type.");
                     break;
             }
+
+            string completedDirectoryPath = Path.Combine(rootDirectoryPath, CompletedDirectoryName);
+            Directory.CreateDirectory(completedDirectoryPath);
+
+            Console.WriteLine($"Moving {inProgressFilePath} to {completedDirectoryPath}");
+            //File.Move(inProgressFilePath, Path.Combine(completedDirectoryPath, inputFileName));
+
+            var completedFileName = $"{Path.GetFileNameWithoutExtension(InputFilePath)}-{Guid.NewGuid()}{extension}";
+
+            //completedFileName = Path.ChangeExtension(completedFileName, ".complete");
+
+            var completedFilePath = Path.Combine(completedDirectoryPath, completedFileName);
+
+            File.Move(inProgressFilePath, completedFilePath);
+
+            string inProgressDirectoryPath = Path.GetDirectoryName(inProgressFilePath);
         }
 
         private void ProcessTextFile(string inProgressFilePath)
